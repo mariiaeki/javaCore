@@ -5,6 +5,8 @@ public class T_1_Quadratic_Equation {
         solver(2, 5, -7); // > 0
         solver(1, -6, 9); // = 0
         solver(9, -6, 2); // < 0
+        solver(-1, 7, -10);
+        solver(-1.4, 2, 0.3);
     }
 
     private static void solver(double a, double b, double c) {
@@ -21,7 +23,6 @@ public class T_1_Quadratic_Equation {
             double x2 = (-b - Math.sqrt(d)) / (2 * a);
             System.out.println("x1 = " + x1 + " ; " + "x2 = " + x2);
         }
-
-
     }
+
 }
