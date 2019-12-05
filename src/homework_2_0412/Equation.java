@@ -55,4 +55,5 @@ public class Equation {
                 ", third_coef=" + third_coef +
                 '}';
     }
+
 }
