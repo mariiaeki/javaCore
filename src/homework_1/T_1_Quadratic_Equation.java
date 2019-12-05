@@ -14,7 +14,7 @@ public class T_1_Quadratic_Equation {
         double d = Math.pow(b, 2) - 4 * a * c;
 
         if (d < 0) {
-            System.out.println("Корней на множестве действительных чисел нет");
+            System.out.println("None");
         } else if (d == 0) {
             double x = -b / (2 * a);
             System.out.println("x1 = x2 = " + x);
