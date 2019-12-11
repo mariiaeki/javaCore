@@ -57,5 +57,28 @@ public class DemoTransportCompany {
         storage.printAllCargo();
         storage.printAllCarrier();
         storage.printAllTransportation();
+
+        //v2
+
+        StorageStr strStorage = new StorageStr();
+
+        strStorage.addCargo(apple.toString());
+        strStorage.addCargo(tshirt.toString());
+        strStorage.addCargo(mac.toString());
+
+        strStorage.printAllCargo();
+
+        strStorage.addCarrier(company_1.toString());
+        strStorage.addCarrier(company_2.toString());
+        strStorage.addCarrier(company_3.toString());
+
+        strStorage.printAllCarrier();
+
+        strStorage.addTrs(transportation_1.toString());
+        strStorage.addTrs(transportation_2.toString());
+        strStorage.addTrs(transportation_3.toString());
+
+        strStorage.printAllTrs();
+
     }
 }

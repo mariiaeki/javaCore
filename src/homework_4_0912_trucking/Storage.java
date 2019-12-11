@@ -7,9 +7,9 @@ import homework_4_0912_trucking.transportation.Transportation;
 public class Storage {
     private static final int ST = 3;
 
-    public static Cargo[] cargoStorage = new Cargo[ST];
-    public static Carrier[] carrierStorage = new Carrier[ST];
-    public static Transportation[] transportationsStorage = new Transportation[ST];
+    private static Cargo[] cargoStorage = new Cargo[ST];
+    private static Carrier[] carrierStorage = new Carrier[ST];
+    private static Transportation[] transportationsStorage = new Transportation[ST];
 
     private int kCargo = 0;
     private int kCarrier = 0;
