@@ -61,4 +61,13 @@ public class Cargo {
         this.transportations = transportations;
     }
 
+    @Override
+    public String toString() {
+        return "Cargo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", weight=" + weight +
+                ", cargoType=" + cargoType +
+                '}';
+    }
 }

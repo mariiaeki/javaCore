@@ -73,4 +73,15 @@ public class Transportation {
         this.carrier = carrier;
     }
 
+    @Override
+    public String toString() {
+        return "Transportation{" +
+                "id=" + id +
+                ", cargo=" + cargo +
+                ", carrier=" + carrier +
+                ", description='" + description + '\'' +
+                ", billTo='" + billTo + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

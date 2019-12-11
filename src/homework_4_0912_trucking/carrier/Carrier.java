@@ -61,4 +61,13 @@ public class Carrier {
         this.transportations = transportations;
     }
 
+    @Override
+    public String toString() {
+        return "Carrier{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", carrierType=" + carrierType +
+                '}';
+    }
 }
