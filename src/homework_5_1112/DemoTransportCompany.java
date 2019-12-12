@@ -1,11 +1,10 @@
-package homework_4_0912_trucking;
+package homework_5_1112;
 
 
-import homework_4_0912_trucking.cargo.Cargo;
-import homework_4_0912_trucking.cargo.CargoType;
-import homework_4_0912_trucking.carrier.Carrier;
-import homework_4_0912_trucking.carrier.CarrierType;
-import homework_4_0912_trucking.transportation.Transportation;
+import homework_5_1112.cargo.*;
+import homework_5_1112.carrier.Carrier;
+import homework_5_1112.carrier.CarrierType;
+import homework_5_1112.transportation.Transportation;
 
 
 public class DemoTransportCompany {
@@ -13,11 +12,11 @@ public class DemoTransportCompany {
 
         Storage storage = new Storage();
 
-        Cargo apple = new Cargo(1L, "Apple", 10, CargoType.FOOD);
+        BasicCargo apple = new PerishableCargo(1L, "Apple", 10, CargoType.FOOD, "20.01.2020");
         storage.addCargo(apple);
-        Cargo tshirt = new Cargo(2L, "T-shirt", 1, CargoType.CLOTHER);
+        BasicCargo tshirt = new OutfitCargo(2L, "T-shirt", 1, CargoType.CLOTHER, 36, OutfitCargo.Gender.FEMALE);
         storage.addCargo(tshirt);
-        Cargo mac = new Cargo(3L, "Macintosh", 2, CargoType.COMPUTERS);
+        BasicCargo mac = new Cargo(3L, "Macintosh", 2, CargoType.COMPUTERS);
         storage.addCargo(mac);
 
 
