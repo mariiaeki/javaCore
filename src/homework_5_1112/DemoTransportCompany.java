@@ -1,6 +1,7 @@
 package homework_5_1112;
 
 
+import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParameterStyle;
 import homework_5_1112.cargo.*;
 import homework_5_1112.carrier.Carrier;
 import homework_5_1112.carrier.CarrierType;
@@ -14,6 +15,8 @@ public class DemoTransportCompany {
 
         BasicCargo apple = new PerishableCargo("Apple", 10, CargoType.FOOD, "20.01.2020");
         storage.addCargo(apple);
+        BasicCargo apple2 = new PerishableCargo("Apple", 100, CargoType.FOOD, "25.01.2020");
+        storage.addCargo(apple2);
         BasicCargo tshirt = new OutfitCargo("T-shirt", 1, CargoType.CLOTHER, 36, OutfitCargo.Gender.FEMALE);
         storage.addCargo(tshirt);
         BasicCargo mac = new Cargo("Macintosh", 2, CargoType.COMPUTERS);
@@ -57,8 +60,15 @@ public class DemoTransportCompany {
         storage.printAllCarrier();
         storage.printAllTransportation();
 
-        System.out.println(storage.getCargoById(1L));
-        System.out.println(storage.getCargoByName("Apple"));
+        System.out.println(storage.getCargoById(3L));
+
+        for (BasicCargo cargo : storage.getCargoByName("Apple")) {
+            System.out.println(cargo);
+        }
+
+        for (Carrier carrier : storage.getCarrierByName("RedLabel")){
+            System.out.println(carrier);
+        }
 
     }
 }

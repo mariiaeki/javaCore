@@ -1,16 +1,15 @@
 package homework_5_1112;
 
 import homework_5_1112.cargo.BasicCargo;
-import homework_5_1112.cargo.Cargo;
 import homework_5_1112.carrier.Carrier;
 import homework_5_1112.transportation.Transportation;
 
 public class Storage {
-    private static final int ST = 10;
+    private static final int STORAGE_CAPACITY = 10;
 
-    private static BasicCargo[] cargoStorage = new BasicCargo[ST];
-    private static Carrier[] carrierStorage = new Carrier[ST];
-    private static Transportation[] transportationsStorage = new Transportation[ST];
+    private static BasicCargo[] cargoStorage = new BasicCargo[STORAGE_CAPACITY];
+    private static Carrier[] carrierStorage = new Carrier[STORAGE_CAPACITY];
+    private static Transportation[] transportationsStorage = new Transportation[STORAGE_CAPACITY];
 
     private int kCargo = 0;
     private int kCarrier = 0;
@@ -21,8 +20,8 @@ public class Storage {
         cargoStorage[kCargo] = cargo;
         kCargo++;
 
-        if (kCargo % (ST - 1) == 0) {
-            BasicCargo[] newCargoStorage = new BasicCargo[kCargo + ST];
+        if (kCargo % (STORAGE_CAPACITY - 1) == 0) {
+            BasicCargo[] newCargoStorage = new BasicCargo[kCargo + STORAGE_CAPACITY];
             copyCargoArray(cargoStorage, newCargoStorage);
             cargoStorage = newCargoStorage;
         }
@@ -39,8 +38,8 @@ public class Storage {
         carrierStorage[kCarrier] = carrier;
         kCarrier++;
 
-        if (kCarrier % (ST - 1) == 0) {
-            Carrier[] newCarrierStorage = new Carrier[kCarrier + ST];
+        if (kCarrier % (STORAGE_CAPACITY - 1) == 0) {
+            Carrier[] newCarrierStorage = new Carrier[kCarrier + STORAGE_CAPACITY];
             copyCarrierArray(carrierStorage, newCarrierStorage);
             carrierStorage = newCarrierStorage;
         }
@@ -57,8 +56,8 @@ public class Storage {
         transportationsStorage[kTrnsp] = trs;
         kTrnsp++;
 
-        if (kTrnsp % (ST - 1) == 0) {
-            Transportation[] newTrsStorage = new Transportation[kTrnsp + ST];
+        if (kTrnsp % (STORAGE_CAPACITY - 1) == 0) {
+            Transportation[] newTrsStorage = new Transportation[kTrnsp + STORAGE_CAPACITY];
             copyTrsArray(transportationsStorage, newTrsStorage);
             transportationsStorage = newTrsStorage;
         }
@@ -89,72 +88,87 @@ public class Storage {
     }
 
     public BasicCargo getCargoById(Long id) {
-        for (int i = 0; i < cargoStorage.length; i++){
-            if (cargoStorage[i] != null) {
-                if (cargoStorage[i].getId().equals(id)) {
-                    //searchCargo = cargoStorage[i];
-                    return cargoStorage[i];
-                }
+        for (int i = 0; i < cargoStorage.length; i++) {
+            if (cargoStorage[i] != null && cargoStorage[i].getId().equals(id)) {
+                return cargoStorage[i];
             }
         }
         return null;
     }
 
-    public BasicCargo getCargoByName(String name) {
+    public BasicCargo[] getCargoByName(String name) {
+        int k = 1;
+        BasicCargo[] cargoByName = new BasicCargo[k];
+
         for (BasicCargo cargo : cargoStorage) {
-            if (cargo != null) {
-                if (cargo.getName().equals(name)) {
-                    return cargo;
+            if (cargo != null && cargo.getName().equals(name)) {
+                if (k == 1) {
+                    cargoByName[k - 1] = cargo;
+                    k++;
+                } else {
+                    BasicCargo[] newCargoByName = new BasicCargo[k];
+                    copyCargoArray(cargoByName, newCargoByName);
+                    cargoByName = newCargoByName;
+                    cargoByName[k - 1] = cargo;
+                    k++;
                 }
             }
         }
-        return null;
+        return cargoByName;
     }
 
     public Carrier getCarrierById(Long id) {
         for (Carrier carrier : carrierStorage) {
-            if (carrier != null) {
-                if (carrier.getId().equals(id)) {
-                    return carrier;
-                }
+            if (carrier != null && carrier.getId().equals(id)) {
+                return carrier;
             }
         }
         return null;
     }
 
-    public Carrier getCarrierByName(String name) {
+    public Carrier[] getCarrierByName(String name) {
+        int k = 1;
+        Carrier[] carrierByName = new Carrier[k];
+
         for (Carrier carrier : carrierStorage) {
-            if (carrier != null) {
-                if (carrier.getName().equals(name)) {
-                    return carrier;
+            if (carrier != null && carrier.getName().equals(name)) {
+                if (k == 1) {
+                    carrierByName[k - 1] = carrier;
+                    k++;
+                } else {
+                    Carrier[] newCarrierByName = new Carrier[k];
+                    copyCarrierArray(carrierByName, newCarrierByName);
+                    carrierByName = newCarrierByName;
+                    carrierByName[k - 1] = carrier;
+                    k++;
                 }
             }
         }
-        return null;
+        return carrierByName;
     }
 
     public Transportation getTransportationById(Long id) {
         for (Transportation trs : transportationsStorage) {
-            if (trs != null) {
-                if (trs.getId().equals(id)) {
-                    return trs;
-                }
+            if (trs != null && trs.getId().equals(id)) {
+                return trs;
             }
         }
         return null;
     }
 
-    public BasicCargo[] getAllCargos(){
+    public BasicCargo[] getAllCargos() {
         return cargoStorage;
     }
 
-    public Carrier[] getAllCarriers(){
+    public Carrier[] getAllCarriers() {
         return carrierStorage;
     }
 
-    public Transportation[] getAllTransportations(){
+    public Transportation[] getAllTransportations() {
         return transportationsStorage;
     }
+
+
 
 
 }
