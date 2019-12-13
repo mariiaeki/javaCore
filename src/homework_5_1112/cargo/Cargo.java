@@ -1,8 +1,7 @@
 package homework_5_1112.cargo;
 
 public class Cargo extends BasicCargo{
-    public Cargo(Long id, String name, int weight, CargoType cargoType) {
-        this.id = id;
+    public Cargo(String name, int weight, CargoType cargoType) {
         this.name = name;
         this.weight = weight;
         this.cargoType = cargoType;

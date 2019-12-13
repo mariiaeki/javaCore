@@ -3,8 +3,7 @@ package homework_5_1112.cargo;
 public class PerishableCargo extends BasicCargo {
     private String dateOfExpire;
 
-    public PerishableCargo(Long id, String name, int weight, CargoType cargoType, String dateOfExpire) {
-        this.id = id;
+    public PerishableCargo(String name, int weight, CargoType cargoType, String dateOfExpire) {
         this.name = name;
         this.weight = weight;
         this.cargoType = cargoType;

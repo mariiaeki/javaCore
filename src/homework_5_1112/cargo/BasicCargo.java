@@ -2,6 +2,8 @@ package homework_5_1112.cargo;
 
 import homework_5_1112.transportation.Transportation;
 
+import java.util.Objects;
+
 public abstract class BasicCargo {
     
     protected Long id;

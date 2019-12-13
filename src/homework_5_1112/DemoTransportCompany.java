@@ -12,11 +12,11 @@ public class DemoTransportCompany {
 
         Storage storage = new Storage();
 
-        BasicCargo apple = new PerishableCargo(1L, "Apple", 10, CargoType.FOOD, "20.01.2020");
+        BasicCargo apple = new PerishableCargo("Apple", 10, CargoType.FOOD, "20.01.2020");
         storage.addCargo(apple);
-        BasicCargo tshirt = new OutfitCargo(2L, "T-shirt", 1, CargoType.CLOTHER, 36, OutfitCargo.Gender.FEMALE);
+        BasicCargo tshirt = new OutfitCargo("T-shirt", 1, CargoType.CLOTHER, 36, OutfitCargo.Gender.FEMALE);
         storage.addCargo(tshirt);
-        BasicCargo mac = new Cargo(3L, "Macintosh", 2, CargoType.COMPUTERS);
+        BasicCargo mac = new Cargo("Macintosh", 2, CargoType.COMPUTERS);
         storage.addCargo(mac);
 
 
@@ -57,7 +57,8 @@ public class DemoTransportCompany {
         storage.printAllCarrier();
         storage.printAllTransportation();
 
-
+        System.out.println(storage.getCargoById(1L));
+        System.out.println(storage.getCargoByName("Apple"));
 
     }
 }

@@ -4,8 +4,7 @@ public class OutfitCargo extends BasicCargo{
     private int size;
     private Gender gender;
 
-    public OutfitCargo(Long id, String name, int weight, CargoType cargoType, int size, Gender gender) {
-        this.id = id;
+    public OutfitCargo(String name, int weight, CargoType cargoType, int size, Gender gender) {
         this.name = name;
         this.weight = weight;
         this.cargoType = cargoType;
