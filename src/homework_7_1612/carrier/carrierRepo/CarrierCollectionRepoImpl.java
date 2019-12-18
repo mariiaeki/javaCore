@@ -1,8 +1,10 @@
 package homework_7_1612.carrier.carrierRepo;
 
+import homework_7_1612.cargo.domain.BasicCargo;
 import homework_7_1612.carrier.domain.Carrier;
 import homework_7_1612.common.domain.BaseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static homework_7_1612.common.util.ArrayUtils.copyArray;
@@ -26,25 +28,15 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
 
     @Override
     public Carrier[] getByName(String name) {
-        int arrayLength = 0;
-        Carrier[] carrierByName = new Carrier[arrayLength];
+        List<Carrier> carrierByNameList = new ArrayList<>();
 
         for (Carrier carrier : carrierStorageList) {
             if (carrier != null && carrier.getName().equals(name)) {
-                if (arrayLength == 0) {
-                    Carrier[] newCarrierByName = new Carrier[1];
-                    carrierByName = newCarrierByName;
-                    carrierByName[0] = carrier;
-                    arrayLength++;
-                } else {
-                    Carrier[] newCarrierByName = new Carrier[arrayLength + 1];
-                    copyArray(carrierByName, newCarrierByName);
-                    carrierByName = newCarrierByName;
-                    carrierByName[arrayLength - 1] = carrier;
-                    arrayLength++;
-                }
+                carrierByNameList.add(carrier);
             }
         }
+
+        Carrier[] carrierByName = carrierByNameList.toArray(new Carrier[carrierByNameList.size()]);
 
         return carrierByName;
     }

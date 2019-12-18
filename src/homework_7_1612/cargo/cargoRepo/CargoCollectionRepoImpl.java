@@ -26,25 +26,16 @@ public class CargoCollectionRepoImpl implements CargoRepo {
 
     @Override
     public BasicCargo[] getByName(String name) {
-        int arrayLength = 0;
-        BasicCargo[] cargoByName = new BasicCargo[arrayLength];
+
+        List<BasicCargo> cargoByNameList = new ArrayList<>();
 
         for (BasicCargo cargo : cargoStorageList) {
-            if (cargo != null && cargo.getName().equals(name)) {
-                if (arrayLength == 0) {
-                    BasicCargo[] newCargoByName = new BasicCargo[1];
-                    cargoByName = newCargoByName;
-                    cargoByName[0] = cargo;
-                    arrayLength++;
-                } else {
-                    BasicCargo[] newCargoByName = new BasicCargo[arrayLength + 1];
-                    copyArray(cargoByName, newCargoByName);
-                    cargoByName = newCargoByName;
-                    cargoByName[arrayLength - 1] = cargo;
-                    arrayLength++;
-                }
-            }
+           if (cargo != null && cargo.getName().equals(name)){
+               cargoByNameList.add(cargo);
+           }
         }
+
+        BasicCargo[] cargoByName = cargoByNameList.toArray( new BasicCargo[cargoByNameList.size()]);
 
         return cargoByName;
     }

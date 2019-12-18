@@ -1,18 +1,29 @@
 package homework_7_1612;
 
 
+import homework_7_1612.cargo.cargoService.CargoService;
+import homework_7_1612.cargo.cargoService.CargoServiceImpl;
 import homework_7_1612.cargo.domain.*;
 import homework_7_1612.carrier.domain.*;
 import homework_7_1612.storage.Storage;
 import homework_7_1612.transportation.domain.Transportation;
 
+import java.util.List;
+
 public class DemoTransportCompany {
     public static void main(String[] args) {
 
-        Storage storage = new Storage();
+        //Storage storage = new Storage();
+        BasicCargo apple = new PerishableCargo("Apple", 10, CargoType.FOOD, "20.01.2020");
+        CargoService cargoService = null;
+        cargoService.add(apple);
+
+        System.out.println(cargoService);
+
+
 
 //        BasicCargo apple = new PerishableCargo("Apple", 10, CargoType.FOOD, "20.01.2020");
-//        storage.addCargo(apple);
+//        storage.add(apple);
 //        BasicCargo apple2 = new PerishableCargo("Apple", 100, CargoType.FOOD, "25.01.2020");
 //        storage.addCargo(apple2);
 //        BasicCargo tshirt = new OutfitCargo("T-shirt", 1, CargoType.CLOTHER, 36, OutfitCargo.Gender.FEMALE);
