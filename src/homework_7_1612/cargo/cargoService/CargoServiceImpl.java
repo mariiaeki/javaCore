@@ -6,16 +6,16 @@ import homework_7_1612.cargo.domain.BasicCargo;
 import java.util.List;
 
 public class CargoServiceImpl implements CargoService {
-//    private final CargoRepo cargoRepo;
+//    private final CargoRepo repo;
 //
-//    public CargoServiceImpl(CargoRepo cargoRepo) {
-//        this.cargoRepo = cargoRepo;
+//    public CargoServiceImpl(CargoRepo repo) {
+//        this.repo = repo;
 //    }
 
     @Override
     public void add(BasicCargo cargo) {
 //        if (cargo != null){
-//            cargoRepo.add(cargo);
+//            repo.add(cargo);
 //        }
 
     }
