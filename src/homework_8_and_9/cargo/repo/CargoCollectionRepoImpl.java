@@ -62,6 +62,10 @@ public class CargoCollectionRepoImpl implements CargoRepo {
         return removed;
     }
 
+    @Override
+    public BasicCargo getByIdFetchingTransportations(long id) {
+        return getById(id);
+    }
 
     @Override
     public void update(BasicCargo cargo) {

@@ -1,8 +1,10 @@
 package homework_8_and_9.cargo.service;
 
 import homework_8_and_9.cargo.comparator.CargoSearchConditions;
+import homework_8_and_9.cargo.exceptions.CargoDeleteConstraintViolationException;
 import homework_8_and_9.cargo.repo.CargoRepo;
 import homework_8_and_9.cargo.domain.BasicCargo;
+import homework_8_and_9.transportation.domain.Transportation;
 
 import java.util.List;
 
@@ -66,10 +68,26 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public boolean deleteById(Long id) {
-        try {
+        BasicCargo cargo = this.getByIdFetchingTransportations(id);
+
+        if (cargo != null) {
+            List<Transportation> transportations = cargo.getTransportations();
+            boolean hasTransportations = transportations != null && transportations.size() > 0;
+            if (hasTransportations) {
+                throw new CargoDeleteConstraintViolationException(id);
+            }
+
             return cargoRepo.deleteById(id);
-        }catch (NullPointerException e){
+        } else {
             return false;
         }
+    }
+
+    @Override
+    public BasicCargo getByIdFetchingTransportations(Long id) {
+        if (id != null){
+            return cargoRepo.getByIdFetchingTransportations(id);
+        }
+        return null;
     }
 }

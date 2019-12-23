@@ -51,10 +51,9 @@ public class TrsServiceImpl implements TrsService {
 
     @Override
     public boolean deleteById(Long id) {
-        try{
+        if (id != null){
             return trsRepo.deleteById(id);
-        }catch (NullPointerException e){
-            return false;
         }
+        return false;
     }
 }

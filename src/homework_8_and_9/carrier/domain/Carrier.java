@@ -3,12 +3,14 @@ package homework_8_and_9.carrier.domain;
 import homework_8_and_9.common.domain.BaseEntity;
 import homework_8_and_9.transportation.domain.Transportation;
 
+import java.util.List;
+
 public class Carrier extends BaseEntity {
 
     private String name;
     private String address;
     private CarrierType carrierType;
-    private Transportation[] transportations;
+    private List<Transportation> transportations;
 
     public Carrier() {
     }
@@ -45,11 +47,11 @@ public class Carrier extends BaseEntity {
         this.carrierType = carrierType;
     }
 
-    public Transportation[] getTransportations() {
+    public List<Transportation> getTransportations() {
         return transportations;
     }
 
-    public void setTransportations(Transportation[] transportations) {
+    public void setTransportations(List<Transportation> transportations) {
         this.transportations = transportations;
     }
 

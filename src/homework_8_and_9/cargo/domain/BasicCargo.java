@@ -3,12 +3,14 @@ package homework_8_and_9.cargo.domain;
 import homework_8_and_9.common.domain.BaseEntity;
 import homework_8_and_9.transportation.domain.Transportation;
 
+import java.util.List;
+
 public abstract class BasicCargo extends BaseEntity {
 
     protected String name;
     protected int weight;
     protected CargoType cargoType;
-    protected Transportation[] transportations;
+    protected List<Transportation> transportations;
 
     public String getName() {
         return name;
@@ -34,12 +36,11 @@ public abstract class BasicCargo extends BaseEntity {
         this.cargoType = cargoType;
     }
 
-    public Transportation[] getTransportations() {
+    public List<Transportation> getTransportations() {
         return transportations;
     }
 
-    public void setTransportations(Transportation[] transportations) {
+    public void setTransportations(List<Transportation> transportations) {
         this.transportations = transportations;
     }
-
 }

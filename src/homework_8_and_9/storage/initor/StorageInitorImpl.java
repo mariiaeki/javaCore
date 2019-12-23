@@ -2,6 +2,7 @@ package homework_8_and_9.storage.initor;
 
 import homework_5_1112.IdGenerator;
 import homework_8_and_9.application.serviceholder.ServiceHolder;
+import homework_8_and_9.cargo.domain.BasicCargo;
 import homework_8_and_9.cargo.domain.OutfitCargo;
 import homework_8_and_9.cargo.domain.PerishableCargo;
 import homework_8_and_9.cargo.service.CargoService;
@@ -10,7 +11,12 @@ import homework_8_and_9.carrier.service.CarrierService;
 import homework_8_and_9.transportation.domain.Transportation;
 import homework_8_and_9.transportation.service.TrsService;
 
+import javax.swing.event.ListDataEvent;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import static homework_8_and_9.common.util.CollectionUtils.isNotEmpty;
 
 public class StorageInitorImpl implements StorageInitor {
     private static final int TOTAL_ENTITIES_IN_GROUP = 6;
@@ -30,6 +36,9 @@ public class StorageInitorImpl implements StorageInitor {
         initCargos();
         initCarriers();
         initTransportations();
+        appendTransportationsToCargos();
+        appendTransportationsToCarriers();
+
     }
 
     private void initCargos() {
@@ -122,5 +131,60 @@ public class StorageInitorImpl implements StorageInitor {
         transportation.setDescription("Transportation");
 
         return transportation;
+    }
+
+    private void appendTransportationsToCargos() {
+        List<BasicCargo> cargos = cargoService.getAll();
+        List<Transportation> transportations = transportationService.getAll();
+
+        if (isNotEmpty(cargos) && isNotEmpty(transportations)) {
+            for (BasicCargo cargo : cargos) {
+                appendTransportationsToCargo(cargo, transportations);
+            }
+        }
+    }
+
+    private void appendTransportationsToCarriers() {
+        List<Carrier> carriers = carrierService.getAll();
+        List<Transportation> transportations = transportationService.getAll();
+
+        if (isNotEmpty(carriers) && isNotEmpty(transportations)) {
+            for (Carrier carrier: carriers){
+                appendTransportationsToCarrier(carrier, transportations);
+            }
+        }
+    }
+
+    private void appendTransportationsToCargo(BasicCargo cargo,
+                                              List<Transportation> transportations) {
+
+        List<Transportation> cargoTransportations = cargo.getTransportations();
+        if (cargoTransportations == null) {
+            cargoTransportations = new ArrayList<>();
+        }
+
+        for (Transportation transportation : transportations) {
+            if (transportation.getCargo() != null && transportation.getCargo().getId()
+                    .equals(cargo.getId())) {
+                cargoTransportations.add(transportation);
+            }
+        }
+
+        cargo.setTransportations(transportations);
+    }
+
+    private void appendTransportationsToCarrier(Carrier carrier, List<Transportation> transportations){
+        List<Transportation> carrierTransportations = carrier.getTransportations();
+
+        if (carrierTransportations == null){
+            carrierTransportations = new ArrayList<>();
+        }
+
+        for (Transportation trs: transportations){
+            if (trs.getCargo() != null && trs.getCargo().getId().equals(carrier.getId())) {
+                carrierTransportations.add(trs);
+            }
+        }
+        carrier.setTransportations(transportations);
     }
 }

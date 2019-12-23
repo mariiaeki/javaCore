@@ -16,4 +16,6 @@ public interface CarrierRepo extends CommonRepo {
 
     void update(Carrier carrier);
 
+    Carrier getByIdFetchingTransportations(long id);
+
 }

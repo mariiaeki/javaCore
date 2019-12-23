@@ -3,6 +3,7 @@ package homework_8_and_9.application;
 import homework_8_and_9.application.serviceholder.ServiceHolder;
 import homework_8_and_9.application.serviceholder.StorageType;
 import homework_8_and_9.cargo.comparator.CargoSearchConditions;
+import homework_8_and_9.cargo.domain.BasicCargo;
 import homework_8_and_9.cargo.domain.CargoField;
 import homework_8_and_9.cargo.service.CargoService;
 import homework_8_and_9.carrier.service.CarrierService;
@@ -36,17 +37,30 @@ public class Application {
 
         printStorageData();
 
-        demoDeleteById(1553L);
+        demoDeleteById();
 
         demoCargoSorting(Arrays.asList(NAME, WEIGHT), ASC);
 
         doSearchOperations();
     }
 
-    private static void demoDeleteById(Long id){
-        System.out.println("Carriers with deleted element: ");
-        System.out.println(carrierService.deleteById(id));
-        carrierService.printAll();
+    private static void demoDeleteById(){
+        System.out.println("------Demo  exceptions------------");
+        Long firstCargo = cargoService.getAll().get(0).getId();
+        BasicCargo cargo = cargoService.getByIdFetchingTransportations(firstCargo);
+        System.out.println("Try to delete cargo");
+        System.out.println("Cargo details:");
+        System.out.println("id: " + cargo.getId());
+        System.out.println("name: " + cargo.getName());
+        System.out.println("total transportations: " + (cargo.getTransportations() != null ? cargo
+                .getTransportations().size() : 0));
+        System.out.println();
+        try {
+            cargoService.deleteById(cargo.getId());
+        } catch (Exception e) {
+            System.out.println("OOPS, something went wrong!");
+            System.out.println(e.getMessage());
+        }
         printSeparator();
 
     }

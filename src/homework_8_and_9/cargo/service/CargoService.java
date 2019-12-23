@@ -21,4 +21,6 @@ public interface CargoService extends CommonService {
 
     List<BasicCargo> getSortedCargos(CargoSearchConditions searchConditions);
 
+    BasicCargo getByIdFetchingTransportations(Long id);
+
 }

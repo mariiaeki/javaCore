@@ -82,6 +82,11 @@ public class CargoDefaultRepoImpl implements CargoRepo {
     }
 
     @Override
+    public BasicCargo getByIdFetchingTransportations(long id) {
+        return getById(id);
+    }
+
+    @Override
     public List<BasicCargo> getAll(){
         return Arrays.asList(cargoStorage);
     }

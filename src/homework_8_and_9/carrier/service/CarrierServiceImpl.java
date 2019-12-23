@@ -1,7 +1,9 @@
 package homework_8_and_9.carrier.service;
 
+import homework_8_and_9.carrier.exceptions.CarrierDeleteConstraintViolationException;
 import homework_8_and_9.carrier.repo.CarrierRepo;
 import homework_8_and_9.carrier.domain.Carrier;
+import homework_8_and_9.transportation.domain.Transportation;
 
 import java.util.List;
 
@@ -59,11 +61,26 @@ public class CarrierServiceImpl implements CarrierService {
 
     @Override
     public boolean deleteById(Long id) {
-        try {
+        Carrier carrier = this.getByIdFetchingTransportations(id);
+
+        if (carrier != null) {
+            List<Transportation> transportations = carrier.getTransportations();
+            boolean hasTransportations = transportations != null && transportations.size() > 0;
+            if (hasTransportations) {
+                throw new CarrierDeleteConstraintViolationException(id);
+            }
+
             return carrierRepo.deleteById(id);
-        }catch (NullPointerException e){
+        } else {
             return false;
         }
+    }
 
+    @Override
+    public Carrier getByIdFetchingTransportations(Long id) {
+        if (id != null){
+            return carrierRepo.getByIdFetchingTransportations(id);
+        }
+        return null;
     }
 }

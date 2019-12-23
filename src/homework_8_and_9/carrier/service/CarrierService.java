@@ -17,4 +17,6 @@ public interface CarrierService extends CommonService {
     void printAll();
 
     void update(Carrier carrier);
+
+    Carrier getByIdFetchingTransportations(Long id);
 }

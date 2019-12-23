@@ -73,5 +73,8 @@ public class CarrierCollectionRepoImpl implements CarrierRepo {
         return null;
     }
 
-
+    @Override
+    public Carrier getByIdFetchingTransportations(long id) {
+        return getById(id);
+    }
 }
