@@ -22,7 +22,7 @@ public class EntitySAXHandler extends DefaultHandler {
     private Map<String, BasicCargo> parsedCargos;
     private PerishableCargo perishableCargo;
     private OutfitCargo outfitCargo;
-    private String id, type, name, weight, size, date, temperature, gender;
+    private String id, type;
 
     private Map<String, Carrier> parsedCarriers;
     private Carrier curCarrier;
@@ -45,6 +45,15 @@ public class EntitySAXHandler extends DefaultHandler {
             }
 
             case "cargo": {
+                if (attributes.getValue("type").equals("PERISHABLE")) {
+                    perishableCargo = new PerishableCargo();
+                    perishableCargo.setCargoType(CargoType.valueOf(attributes.getValue("type")));
+                    perishableCargo.setId(IdGenerator.generateId());
+                }else {
+                    outfitCargo = new OutfitCargo();
+                    outfitCargo.setCargoType(CargoType.valueOf(attributes.getValue("type")));
+                    outfitCargo.setId(IdGenerator.generateId());
+                }
                 type = attributes.getValue("type");
                 id = attributes.getValue("id");
                 break;
@@ -89,63 +98,52 @@ public class EntitySAXHandler extends DefaultHandler {
             case "name": {
                 if (type.equals("CARRIER")){
                     curCarrier.setName(data);
+                }else if (type.equals("PERISHABLE")){
+                    perishableCargo.setName(data);
                 }else {
-                    name = data;
+                    outfitCargo.setName(data);
                 }
                 break;
             }
 
             case "weight": {
-                weight = data;
+                if (type.equals("PERISHABLE")){
+                    perishableCargo.setWeight(Integer.parseInt(data));
+                }else {
+                    outfitCargo.setWeight(Integer.parseInt(data));
+                }
                 break;
             }
 
             case "size": {
-                size = data;
+                outfitCargo.setSize(Integer.parseInt(data));
                 break;
             }
 
             case "gender": {
-                gender = data;
+                outfitCargo.setGender(OutfitCargo.Gender.valueOf(data));
                 break;
             }
 
             case "storeTemperature": {
-                temperature = data;
+                perishableCargo.setStoreTemperature(Integer.parseInt(data));
                 break;
             }
 
             case "expirationDate": {
-                date = data;
+                try {
+                    perishableCargo.setDateOfExpire(JavaUtilDateUtils.valueOf(data));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
 
             case "cargo": {
                 if (type.equals("PERISHABLE")){
-                    perishableCargo = new PerishableCargo();
-                    perishableCargo.setId(IdGenerator.generateId());
-                    perishableCargo.setName(name);
-                    perishableCargo.setWeight(Integer.parseInt(weight));
-                    try {
-                        perishableCargo.setDateOfExpire(JavaUtilDateUtils.valueOf(date));
-                    }catch (ParseException e){
-                        e.printStackTrace();
-                    }
-                    perishableCargo.setStoreTemperature(Integer.parseInt(temperature));
-                    perishableCargo.setCargoType(CargoType.valueOf(type));
-
                     parsedCargos.put(id, perishableCargo);
                     break;
-
                 }else {
-                    outfitCargo = new OutfitCargo();
-                    outfitCargo.setId(IdGenerator.generateId());
-                    outfitCargo.setName(name);
-                    outfitCargo.setWeight(Integer.parseInt(weight));
-                    outfitCargo.setSize(Integer.valueOf(size));
-                    outfitCargo.setGender(OutfitCargo.Gender.valueOf(gender));
-                    outfitCargo.setCargoType(CargoType.valueOf(type));
-
                     parsedCargos.put(id, outfitCargo);
                     break;
                 }
