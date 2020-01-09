@@ -4,16 +4,19 @@ import homework_13_3012.cargo.domain.BasicCargo;
 import homework_13_3012.carrier.domain.Carrier;
 import homework_13_3012.common.company_exceptions.checked.InitStorageException;
 
+import homework_13_3012.common.util.FileUtils;
 import homework_13_3012.transportation.domain.Transportation;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class StorageInitorInXMLWithSAX extends BaseStorageInitorInFile
 {
+    private static final String FILE = "/xmldata.xml";
 
     @Override
     public void storageInitor() throws InitStorageException {
@@ -23,7 +26,7 @@ public class StorageInitorInXMLWithSAX extends BaseStorageInitorInFile
 
             EntitySAXHandler personHandler = new EntitySAXHandler();
 
-            File file = new File("C:\\Users\\Lenovo\\IdeaProjects\\javaCore\\javaCore\\resources\\xmldata.xml");
+            File file = FileUtils.createFileFromResource("xmldata", "xmldata-file", FILE);
             saxParser.parse(file, personHandler);
 
 
@@ -42,4 +45,5 @@ public class StorageInitorInXMLWithSAX extends BaseStorageInitorInFile
         }
 
     }
+
 }
