@@ -1,26 +1,27 @@
-package homework_10_2312.application;
+package homework_13_3012.application;
 
-import homework_10_2312.application.serviceholder.ServiceHolder;
-import homework_10_2312.application.serviceholder.StorageType;
-import homework_10_2312.common.comparator.EntitySortConditions;
-import homework_10_2312.cargo.domain.BasicCargo;
-import homework_10_2312.cargo.domain.CargoField;
-import homework_10_2312.cargo.service.CargoService;
-import homework_10_2312.carrier.service.CarrierService;
-import homework_10_2312.common.search.OrderType;
-import homework_10_2312.common.util.ArrayUtils;
-import homework_10_2312.storage.initor.StorageInitor;
-import homework_10_2312.storage.initor.StorageInitorImpl;
-import homework_10_2312.transportation.service.TrsService;
+import homework_13_3012.application.serviceholder.ServiceHolder;
+import homework_13_3012.application.serviceholder.StorageType;
+import homework_13_3012.cargo.domain.BasicCargo;
+import homework_13_3012.cargo.domain.CargoField;
+import homework_13_3012.cargo.service.CargoService;
+import homework_13_3012.carrier.service.CarrierService;
+import homework_13_3012.common.company_exceptions.checked.InitStorageException;
+import homework_13_3012.common.company_exceptions.checked.ReportExceptions;
+import homework_13_3012.common.comparator.EntitySortConditions;
+import homework_13_3012.common.search.OrderType;
+import homework_13_3012.common.util.ArrayUtils;
+import homework_13_3012.reporting.ReportDefaultService;
+import homework_13_3012.reporting.ReportService;
+import homework_13_3012.storage.initor.InitStorageType;
+import homework_13_3012.storage.initor.StorageInitor;
+import homework_13_3012.transportation.service.TrsService;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
-import static homework_10_2312.cargo.domain.CargoField.NAME;
-import static homework_10_2312.cargo.domain.CargoField.WEIGHT;
-import static homework_10_2312.common.search.OrderType.ASC;
 import static homework_10_2312.common.util.CollectionUtils.printCollection;
+import static homework_13_3012.storage.initor.StorageInitorFactory.getStorageInitor;
 
 public class Application {
     private static final String SEPARATOR = "--------------";
@@ -29,24 +30,33 @@ public class Application {
     private static TrsService transportationService;
 
     public static void main(String[] args) {
-        ServiceHolder.initServiceHolder(StorageType.COLLECTION);
-        cargoService = ServiceHolder.getInstance().getCargoService();
-        carrierService = ServiceHolder.getInstance().getCarrierService();
-        transportationService = ServiceHolder.getInstance().getTransportationService();
+        try {
+            ServiceHolder.initServiceHolder(StorageType.COLLECTION);
+            cargoService = ServiceHolder.getInstance().getCargoService();
+            carrierService = ServiceHolder.getInstance().getCarrierService();
+            transportationService = ServiceHolder.getInstance().getTransportationService();
 
-        StorageInitor storageInitor = new StorageInitorImpl();
-        storageInitor.storageInitor();
+            StorageInitor storageInitor = getStorageInitor(InitStorageType.XML_FILE_SAX);
+            storageInitor.storageInitor();
 
-        printStorageData();
+            printStorageData();
 
-        demoDeleteById();
+            demoDeleteById();
 
-        demoCargoSorting(Arrays.asList(NAME, WEIGHT), ASC);
+            //demoSortOperations();
 
-        doSearchOperations();
+            doSearchOperations();
+
+            demoReportService();
+        } catch (InitStorageException e) {
+            e.getCause().printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private static void demoDeleteById(){
+
+    private static void demoDeleteById() {
         System.out.println("------Demo  exceptions------------");
         Long firstCargo = cargoService.getAll().get(0).getId();
         BasicCargo cargo = cargoService.getByIdFetchingTransportations(firstCargo);
@@ -99,7 +109,7 @@ public class Application {
     }
 
     private static void demoCargoSorting(Collection<CargoField> sortFields, OrderType orderType) {
-        EntitySortConditions cargoSearchCondition = new EntitySortConditions();
+        EntitySortConditions<CargoField> cargoSearchCondition = new EntitySortConditions();
         cargoSearchCondition.setOrderType(orderType);
         cargoSearchCondition.setSortFields(new LinkedHashSet<>(sortFields));
 
@@ -110,8 +120,27 @@ public class Application {
 
     }
 
+//    private static void demoSortOperations() {
+//        demoCargoSorting(singletonList(NAME), ASC);
+//        demoCargoSorting(singletonList(NAME), DESC);
+//
+//        demoCargoSorting(singletonList(WEIGHT), ASC);
+//        demoCargoSorting(singletonList(WEIGHT), DESC);
+//
+//        demoCargoSorting(Arrays.asList(NAME, WEIGHT), ASC);
+//        demoCargoSorting(Arrays.asList(NAME, WEIGHT), DESC);
+//    }
+
     private static void printSeparator() {
         System.out.println(SEPARATOR);
+    }
+
+    private static void demoReportService() throws ReportExceptions {
+        System.out.println("----------Demo report service ---------------");
+        ReportService reportService = new ReportDefaultService(
+                cargoService, carrierService, transportationService
+        );
+        reportService.exportData();
     }
 
 
