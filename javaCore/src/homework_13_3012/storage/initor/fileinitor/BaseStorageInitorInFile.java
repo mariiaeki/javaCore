@@ -22,7 +22,7 @@ public abstract class BaseStorageInitorInFile implements StorageInitor {
 
             if (cargo != null) {
                 List<Transportation> transportations =
-                        cargo.getTransportations() == null ? new ArrayList<>() : cargo.getTransportations();
+                        cargo.getTransportations() /*== null ? new ArrayList<>() : cargo.getTransportations()*/;
                 transportations.add(transportation);
                 transportation.setCargo(cargo);
                 cargo.setTransportations(transportations);
@@ -30,7 +30,7 @@ public abstract class BaseStorageInitorInFile implements StorageInitor {
 
             if (carrier != null) {
                 List<Transportation> transportations =
-                        carrier.getTransportations() == null ? new ArrayList<>() : carrier.getTransportations();
+                        carrier.getTransportations()/* == null ? new ArrayList<>() : carrier.getTransportations()*/;
                 transportations.add(transportation);
                 transportation.setCarrier(carrier);
                 carrier.setTransportations(transportations);
