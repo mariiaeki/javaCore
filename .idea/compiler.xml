@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="JavaCoreEpam" target="7" />
+      <module name="JavaCoreEpam" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

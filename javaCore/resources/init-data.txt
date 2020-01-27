@@ -2,6 +2,8 @@
 1_a |PERISHABLE| TOMATO  | 10 | 11.11.2020 | -5
 2_a |OUTFIT| SKIRT  | 20 | FEMALE  | 43
 3_a |PERISHABLE| MANGO | 300 | 24.12.2020 | -2
+4_a |OUTFIT| SKIRT  | 2 | FEMALE  | 43
+5_a |PERISHABLE| MANGO | 400 | 24.12.2020 | -2
 
 --Carrier section--
 1_b | FAST_DELIVERY | Spb, Nevskiy 8     | SHIP

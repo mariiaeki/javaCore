@@ -18,11 +18,17 @@ import homework_15_2001_concurrency.storage.initor.StorageInitor;
 import homework_15_2001_concurrency.transportation.service.TrsService;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
+import static homework_15_2001_concurrency.cargo.domain.CargoField.NAME;
+import static homework_15_2001_concurrency.cargo.domain.CargoField.WEIGHT;
+import static homework_15_2001_concurrency.common.search.OrderType.ASC;
+import static homework_15_2001_concurrency.common.search.OrderType.DESC;
 import static homework_15_2001_concurrency.common.util.CollectionUtils.printCollection;
 import static homework_15_2001_concurrency.storage.initor.StorageInitorFactory.getStorageInitor;
+import static java.util.Collections.singletonList;
 
 public class Application {
     private static final String SEPARATOR = "--------------";
@@ -37,7 +43,7 @@ public class Application {
             carrierService = ServiceHolder.getInstance().getCarrierService();
             transportationService = ServiceHolder.getInstance().getTransportationService();
 
-            StorageInitor storageInitor = getStorageInitor(InitStorageType.XML_FILE);
+            StorageInitor storageInitor = getStorageInitor(InitStorageType.TEXT_FILE);
             storageInitor.storageInitor();
 
             //Инициализация через 2 документа, синк по присваиванию id.
@@ -48,7 +54,7 @@ public class Application {
 
             //demoDeleteById();
 
-            //demoSortOperations();
+            demoSortOperations();
 
             //doSearchOperations();
 
@@ -158,16 +164,16 @@ public class Application {
 
     }
 
-//    private static void demoSortOperations() {
-//        demoCargoSorting(singletonList(NAME), ASC);
-//        demoCargoSorting(singletonList(NAME), DESC);
-//
-//        demoCargoSorting(singletonList(WEIGHT), ASC);
-//        demoCargoSorting(singletonList(WEIGHT), DESC);
-//
-//        demoCargoSorting(Arrays.asList(NAME, WEIGHT), ASC);
-//        demoCargoSorting(Arrays.asList(NAME, WEIGHT), DESC);
-//    }
+    private static void demoSortOperations() {
+        demoCargoSorting(singletonList(NAME), ASC);
+        demoCargoSorting(singletonList(NAME), DESC);
+
+        demoCargoSorting(singletonList(WEIGHT), ASC);
+        demoCargoSorting(singletonList(WEIGHT), DESC);
+
+        demoCargoSorting(Arrays.asList(NAME, WEIGHT), ASC);
+        demoCargoSorting(Arrays.asList(NAME, WEIGHT), DESC);
+    }
 
     private static void printSeparator() {
         System.out.println(SEPARATOR);

@@ -2,7 +2,7 @@
     <cargos>
         <cargo id="1_a" type="PERISHABLE">
             <name>APPLE</name>
-            <weight>100</weight>
+            <weight>1000</weight>
             <expirationDate>20.12.2025</expirationDate>
             <storeTemperature>-50</storeTemperature>
         </cargo>
@@ -17,6 +17,12 @@
             <weight>300</weight>
             <expirationDate>11.11.2020</expirationDate>
             <storeTemperature>-20</storeTemperature>
+        </cargo>
+        <cargo id="4_a" type="PERISHABLE">
+            <name>APPLE</name>
+            <weight>200</weight>
+            <expirationDate>20.12.2025</expirationDate>
+            <storeTemperature>-50</storeTemperature>
         </cargo>
 
     </cargos>
