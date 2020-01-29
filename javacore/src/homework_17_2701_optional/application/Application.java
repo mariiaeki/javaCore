@@ -1,33 +1,33 @@
-package homework_16_2401_java8.application;
+package homework_17_2701_optional.application;
 
-import homework_16_2401_java8.application.serviceholder.ServiceHolder;
-import homework_16_2401_java8.application.serviceholder.StorageType;
-import homework_16_2401_java8.cargo.domain.BasicCargo;
-import homework_16_2401_java8.cargo.domain.CargoField;
-import homework_16_2401_java8.cargo.service.CargoService;
-import homework_16_2401_java8.carrier.service.CarrierService;
-import homework_16_2401_java8.common.company_exceptions.checked.InitStorageException;
-import homework_16_2401_java8.common.company_exceptions.checked.ReportExceptions;
-import homework_16_2401_java8.common.comparator.EntitySortConditions;
-import homework_16_2401_java8.common.search.OrderType;
-import homework_16_2401_java8.common.util.ArrayUtils;
-import homework_16_2401_java8.reporting.ReportDefaultService;
-import homework_16_2401_java8.reporting.ReportService;
-import homework_16_2401_java8.storage.initor.InitStorageType;
-import homework_16_2401_java8.storage.initor.StorageInitor;
-import homework_16_2401_java8.transportation.service.TrsService;
+import homework_17_2701_optional.application.serviceholder.ServiceHolder;
+import homework_17_2701_optional.cargo.domain.BasicCargo;
+import homework_17_2701_optional.cargo.domain.CargoField;
+import homework_17_2701_optional.cargo.service.CargoService;
+import homework_17_2701_optional.application.serviceholder.StorageType;
+import homework_17_2701_optional.carrier.service.CarrierService;
+import homework_17_2701_optional.common.company_exceptions.checked.InitStorageException;
+import homework_17_2701_optional.common.company_exceptions.checked.ReportExceptions;
+import homework_17_2701_optional.common.comparator.EntitySortConditions;
+import homework_17_2701_optional.common.search.OrderType;
+import homework_17_2701_optional.common.util.ArrayUtils;
+import homework_17_2701_optional.reporting.ReportDefaultService;
+import homework_17_2701_optional.reporting.ReportService;
+import homework_17_2701_optional.storage.initor.InitStorageType;
+import homework_17_2701_optional.storage.initor.StorageInitor;
+import homework_17_2701_optional.transportation.service.TrsService;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 
-import static homework_16_2401_java8.cargo.domain.CargoField.NAME;
-import static homework_16_2401_java8.cargo.domain.CargoField.WEIGHT;
-import static homework_16_2401_java8.common.search.OrderType.ASC;
-import static homework_16_2401_java8.common.search.OrderType.DESC;
-import static homework_16_2401_java8.common.util.CollectionUtils.printCollection;
-import static homework_16_2401_java8.storage.initor.StorageInitorFactory.getStorageInitor;
+import static homework_17_2701_optional.cargo.domain.CargoField.NAME;
+import static homework_17_2701_optional.cargo.domain.CargoField.WEIGHT;
+import static homework_17_2701_optional.common.search.OrderType.ASC;
+import static homework_17_2701_optional.common.search.OrderType.DESC;
+import static homework_17_2701_optional.common.util.CollectionUtils.printCollection;
+import static homework_17_2701_optional.storage.initor.StorageInitorFactory.getStorageInitor;
 import static java.util.Collections.singletonList;
 
 public class Application {
@@ -53,6 +53,7 @@ public class Application {
             printStorageData();
 
             demoDeleteById();
+            printStorageData();
 
             //demoSortOperations();
 
@@ -95,12 +96,15 @@ public class Application {
 
 
     private static void demoDeleteById() {
-        transportationService.deleteById(9L);
-        cargoService.deleteById(4L);
+//        transportationService.deleteById(9L);
+//        cargoService.deleteById(4L);
+//
+//        cargoService.deleteById(null);
+//        cargoService.deleteById(34L);
 
         System.out.println("------Demo  exceptions------------");
         Long firstCargo = cargoService.getAll().get(0).getId();
-        BasicCargo cargo = cargoService.getByIdFetchingTransportations(firstCargo);
+        BasicCargo cargo = cargoService.getByIdFetchingTransportations(firstCargo).get();
         System.out.println("Try to delete cargo");
         System.out.println("Cargo details:");
         System.out.println("id: " + cargo.getId());
