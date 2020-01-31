@@ -3,7 +3,7 @@
         <cargo id="1_a" type="PERISHABLE">
             <name>APPLE</name>
             <weight>1000</weight>
-            <expirationDate>20.12.2025</expirationDate>
+            <expirationDate>2025-12-20</expirationDate>
             <storeTemperature>-50</storeTemperature>
         </cargo>
         <cargo id="2_a" type="OUTFIT">
@@ -15,13 +15,13 @@
         <cargo id="3_a" type="PERISHABLE">
             <name>ORANGE</name>
             <weight>300</weight>
-            <expirationDate>11.11.2020</expirationDate>
+            <expirationDate>2025-02-20</expirationDate>
             <storeTemperature>-20</storeTemperature>
         </cargo>
         <cargo id="4_a" type="PERISHABLE">
             <name>APPLE</name>
             <weight>200</weight>
-            <expirationDate>20.12.2025</expirationDate>
+            <expirationDate>2025-11-20</expirationDate>
             <storeTemperature>-50</storeTemperature>
         </cargo>
 
@@ -44,19 +44,19 @@
     <transportations>
         <transportation cargoref="1_a" carrierref="1_b">
             <billto>Ivanov</billto>
-            <transportationBeginDate>11.11.2010</transportationBeginDate>
+            <transportationBeginDate>2020-12-03T10:15:30</transportationBeginDate>
             <description>Vip order</description>
         </transportation>
 
         <transportation cargoref="2_a" carrierref="1_b">
             <billto>Petrov</billto>
-            <transportationBeginDate>11.11.2011</transportationBeginDate>
+            <transportationBeginDate>2019-12-28T12:15:30</transportationBeginDate>
             <description>Fragile</description>
         </transportation>
 
         <transportation cargoref="3_a" carrierref="2_b">
             <billto>Sidorov</billto>
-            <transportationBeginDate>01.01.2017</transportationBeginDate>
+            <transportationBeginDate>2020-01-04T10:39:40</transportationBeginDate>
             <description>Fragile</description>
         </transportation>
     </transportations>

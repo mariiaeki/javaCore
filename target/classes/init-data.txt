@@ -1,15 +1,15 @@
 --Cargo section--
-1_a |PERISHABLE| TOMATO  | 10 | 11.11.2020 | -5
+1_a |PERISHABLE| TOMATO  | 10 | 2025.12.20 | -5
 2_a |OUTFIT| SKIRT  | 20 | FEMALE  | 43
-3_a |PERISHABLE| MANGO | 300 | 24.12.2020 | -2
+3_a |PERISHABLE| MANGO | 300 | 2025.02.22 | -2
 4_a |OUTFIT| SKIRT  | 2 | FEMALE  | 43
-5_a |PERISHABLE| MANGO | 400 | 24.12.2020 | -2
+5_a |PERISHABLE| MANGO | 400 | 2022.11.03 | -2
 
 --Carrier section--
 1_b | FAST_DELIVERY | Spb, Nevskiy 8     | SHIP
 2_b | SLOWEST EVER  | Spb, Lenina 90 | PLANE
 
 --Transportation section--
-1_a | 1_b | Vip order | Vasechkin  | 11.11.2032
-2_a | 1_b | Fragile   | Mashkin  | 11.11.2022
-3_a | 2_b | Fragile   | Anichkov | 01.01.2082
+1_a | 1_b | Vip order | Vasechkin  | 2019.12.28
+2_a | 1_b | Fragile   | Mashkin  | 2019.12.20
+3_a | 2_b | Fragile   | Anichkov | 2020.01.20
