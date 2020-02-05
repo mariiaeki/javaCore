@@ -29,7 +29,7 @@ public class CargoCollectionRepoImpl implements CargoRepo, Serializable {
 
     @Override
     public List<BasicCargo> getByName(String name) {
-        return cargoStorageList.stream().filter((BasicCargo) -> BasicCargo.getName().equals(name))
+        return cargoStorageList.stream().filter(cargo -> cargo.getName().equals(name))
                 .collect(Collectors.toList());
     }
 
@@ -40,7 +40,7 @@ public class CargoCollectionRepoImpl implements CargoRepo, Serializable {
 
     @Override
     public boolean deleteById(long id) {
-        return cargoStorageList.removeIf(BasicCargo -> BasicCargo.getId().equals(id));
+        return cargoStorageList.removeIf(cargo -> cargo.getId().equals(id));
     }
 
     @Override

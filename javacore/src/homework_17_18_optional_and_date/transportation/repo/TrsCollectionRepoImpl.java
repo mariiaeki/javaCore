@@ -37,7 +37,7 @@ public class TrsCollectionRepoImpl implements TrsRepo, Serializable {
 
     @Override
     public boolean deleteById(long id) {
-        return trsStorageList.removeIf(Transportations -> Transportations.getId().equals(id));
+        return trsStorageList.removeIf(transportations -> transportations.getId().equals(id));
 
     }
 

@@ -45,7 +45,7 @@ public class CarrierCollectionRepoImpl implements CarrierRepo, Serializable {
     @Override
     public boolean deleteById(long id) {
         return carrierStorageList
-                .removeIf(Carrier -> Carrier.getId().equals(id));
+                .removeIf(carrier -> carrier.getId().equals(id));
     }
 
     public static Integer findIndexInListStorageById(List<Carrier> list, long id) {
