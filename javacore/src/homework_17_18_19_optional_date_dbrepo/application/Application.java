@@ -49,9 +49,12 @@ public class Application {
             //Один раз из 8 делает неправильно (null при добавлении)
             //initStorage();
 
-            addDataToBD();
+            //addDataToBD();
 
-            printStorageData();
+
+            transportationService.printAll();
+
+            //printStorageData();
 
             //demoDeleteById();
 

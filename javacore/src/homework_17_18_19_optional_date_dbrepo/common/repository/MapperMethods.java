@@ -8,6 +8,8 @@ import homework_17_18_19_optional_date_dbrepo.carrier.domain.Carrier;
 import homework_17_18_19_optional_date_dbrepo.carrier.domain.CarrierType;
 import homework_17_18_19_optional_date_dbrepo.transportation.domain.Transportation;
 
+import javax.sql.rowset.CachedRowSet;
+import javax.swing.text.DateFormatter;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +27,7 @@ public class MapperMethods {
 
         return cargo;
     }
+
     public static OutfitCargo mapOutfitCargo(ResultSet rs) throws Exception {
         OutfitCargo cargo = new OutfitCargo();
         cargo.setId(rs.getLong("cargo_id"));
@@ -44,12 +47,14 @@ public class MapperMethods {
         cargo.setWeight(rs.getInt("weight"));
         cargo.setCargoType(CargoType.valueOf(rs.getString("cargo_type")));
         cargo.setStoreTemperature(rs.getInt("store_temperature"));
-        cargo.setDateOfExpire(LocalDate.parse(rs.getString("date_of_expire")));
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        cargo.setDateOfExpire(LocalDate.parse(rs.getString("date_of_expire"), dateFormatter));
 
         return cargo;
     }
 
-    public static Carrier mapCarrier(ResultSet rs) throws Exception{
+    public static Carrier mapCarrier(ResultSet rs) throws Exception {
         Carrier carrier = new Carrier();
 
         carrier.setId(rs.getLong("carrier_id"));
@@ -60,24 +65,16 @@ public class MapperMethods {
         return carrier;
     }
 
-    public static Transportation mapTrs(ResultSet rs) throws Exception{
+    public static Transportation mapTrs(ResultSet rs) throws Exception {
         Transportation trs = new Transportation();
 
         trs.setId(rs.getLong("transportation_id"));
-        trs.setCargo(executeQueryList("SELECT * FROM cargos WHERE cargo_id =?",
-                ps -> {
-                    ps.setLong(1, rs.getLong("cargo_id"));
-                },
-                MapperMethods::mapBasicCargo
-
-        ).get(0));
-        trs.setCarrier(executeQueryList("SELECT * FROM carriers WHERE carrier_id =?",
-                ps -> {
-                    ps.setLong(1, rs.getLong("carrier_id"));
-                },
-                MapperMethods::mapCarrier
-
-        ).get(0));
+        if (rs.getString("cargo_type").equals(CargoType.OUTFIT)) {
+            trs.setCargo(mapOutfitCargo(rs));
+        } else {
+            trs.setCargo(mapBasicCargo(rs));
+        }
+        trs.setCarrier(mapCarrier(rs));
         trs.setDescription(rs.getString("description"));
         trs.setBillTo(rs.getString("billTo"));
 

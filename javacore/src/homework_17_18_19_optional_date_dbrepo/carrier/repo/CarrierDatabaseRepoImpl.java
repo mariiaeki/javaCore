@@ -85,6 +85,8 @@ public class CarrierDatabaseRepoImpl implements CarrierRepo {
                      ("insert carriers(carrier_id, carrier_name, addres, carrier_type) " +
                              "values(?, ?, ?, ?)");
         ) {
+            connection.setAutoCommit(false);
+
             for (Carrier carrier : carriers) {
                 ps.setLong(1, carrier.getId());
                 ps.setString(2, carrier.getName());
@@ -94,6 +96,8 @@ public class CarrierDatabaseRepoImpl implements CarrierRepo {
             }
 
             ps.executeBatch();
+
+            connection.commit();
 
         } catch (
                 Exception e) {

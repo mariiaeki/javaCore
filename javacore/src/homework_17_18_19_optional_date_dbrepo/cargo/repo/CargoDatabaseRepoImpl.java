@@ -110,6 +110,8 @@ public class CargoDatabaseRepoImpl implements CargoRepo, Serializable {
              PreparedStatement ps = connection.prepareStatement
                      ("insert cargos(cargo_id, cargo_name, weight, cargo_type) values(?, ?, ?, ?)");
         ) {
+            connection.setAutoCommit(false);
+
             for (BasicCargo cargo : cargos){
                 ps.setLong(1, cargo.getId());
                 ps.setString(2, cargo.getName());
@@ -121,7 +123,7 @@ public class CargoDatabaseRepoImpl implements CargoRepo, Serializable {
 
             ps.executeBatch();
 
-
+            connection.commit();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

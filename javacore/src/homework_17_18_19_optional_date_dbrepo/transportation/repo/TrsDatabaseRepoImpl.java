@@ -26,7 +26,10 @@ public class TrsDatabaseRepoImpl implements TrsRepo {
 
     @Override
     public List<Transportation> getAll() {
-        return selectAll("SELECT * FROM transportations",
+        return selectAll("SELECT *" +
+                        "FROM transportations trs " +
+                        "INNER JOIN cargos c ON c.cargo_id = trs.cargo_id " +
+                        "inner JOIN carriers cr ON cr.carrier_id = trs.carrier_id",
                 MapperMethods::mapTrs
         );
     }

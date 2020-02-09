@@ -17,6 +17,14 @@ public class PerishableCargo extends BasicCargo {
         this.storeTemperature = storeTemperature;
     }
 
+    public PerishableCargo( Long id, String name, int weight, CargoType cargoType, LocalDate date, int storeTemperature) {
+        this.id = id;
+        this.name = name;
+        this.weight = weight;
+        this.cargoType = cargoType;
+        this.dateOfExpire = date;
+        this.storeTemperature = storeTemperature;    }
+
     public LocalDate getDateOfExpire() {
         return dateOfExpire;
     }
