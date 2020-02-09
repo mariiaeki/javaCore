@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: SerializationTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
+SerializationTest.testSerializationFoodNullCargo()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at SerializationTest.testSerializationFoodNullCargo(SerializationTest.java:58)
+
+SerializationTest.testSerializationFoodCargo()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at SerializationTest.testSerializationFoodCargo(SerializationTest.java:37)
+
+SerializationTest.testSerializationClothersCargo()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at SerializationTest.testSerializationClothersCargo(SerializationTest.java:68)
+
+SerializationTest.testSerializationClothersCargos()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at SerializationTest.testSerializationClothersCargos(SerializationTest.java:78)
+
+SerializationTest.testSerializationFoodCargos()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at SerializationTest.testSerializationFoodCargos(SerializationTest.java:49)
+
+SerializationTest.testSerializationClothersNullCargos()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at SerializationTest.testSerializationClothersNullCargos(SerializationTest.java:88)
+
